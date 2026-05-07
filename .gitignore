@@ -1,2 +1,5 @@
+oscript_modules/
+out/
+*.ospx
 container/
 .env

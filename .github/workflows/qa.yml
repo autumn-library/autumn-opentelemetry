@@ -1,0 +1,15 @@
+name: Контроль качества
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  sonar:
+    uses: autumn-library/workflows/.github/workflows/sonar.yml@coverage
+    with:
+      github_repository: autumn-library/autumn-opentelemetry
+      coveralls: true
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
