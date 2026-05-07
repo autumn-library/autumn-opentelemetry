@@ -102,8 +102,8 @@ opm install autumn-opentelemetry
 ## Дальнейшее изучение
 
 ### Руководство пользователя
-- [Конфигурация](020-configuration.md) — параметры OpenTelemetry и логирования
-- [Аннотации](030-annotations.md) — подробное описание аннотаций с примерами
+- [Конфигурация](/autumn-opentelemetry/configuration.md) — параметры OpenTelemetry и логирования
+- [Аннотации](/autumn-opentelemetry/annotations.md) — подробное описание аннотаций с примерами
 
 ### Справочник API
-- [Публичный интерфейс](../api/index.md)
+- [Публичный интерфейс](/api/autumn-opentelemetry/index.md)
