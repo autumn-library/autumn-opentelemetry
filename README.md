@@ -32,8 +32,12 @@ opm install autumn-opentelemetry
 
 ## Документация
 
-- [Руководство пользователя](docs/product/010-index.md)
-- [Справочник API](docs/api/index.md)
+- [Руководство пользователя](https://autumn-library.github.io/autumn-opentelemetry/)
+- [Справочник API](https://autumn-library.github.io/api/autumn-opentelemetry/)
+
+Исходный код документации располагается в каталоге [/docs](./docs).
+
+Приятного пользования! 🍂
 
 ## Основные возможности
 
