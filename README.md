@@ -154,17 +154,27 @@ opm install autumn-opentelemetry
 
 ## Конфигурация OpenTelemetry
 
-Настройка через переменные окружения (стандарт OTel):
+SDK активируется автоматически при подключении `autumn-opentelemetry`. Единственный обязательный параметр — имя сервиса.
+
+Минимальная конфигурация через `autumn-properties.json`:
+
+```json
+{
+  "otel": {
+    "service": {
+      "name": "my-service"
+    }
+  }
+}
+```
+
+Или через переменную окружения:
 
 ```sh
 OTEL_SERVICE_NAME=my-service
-OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318
-OTEL_TRACES_EXPORTER=otlp
-OTEL_METRICS_EXPORTER=otlp
-OTEL_LOGS_EXPORTER=otlp
 ```
 
-Либо через файл `autumn-properties.json` (соответствует тем же параметрам):
+Все остальные параметры опциональны — по умолчанию SDK экспортирует трассы, метрики и логи по `http://localhost:4318` (протокол `http/protobuf`). Полный список параметров в `autumn-properties.json`:
 
 ```json
 {
@@ -184,5 +194,7 @@ OTEL_LOGS_EXPORTER=otlp
   }
 }
 ```
+
+Чтобы отключить SDK: `"otel": { "sdk": { "disabled": true } }`.
 
 Подробнее — в документации [opentelemetry](https://github.com/nixel2007/opentelemetry).
