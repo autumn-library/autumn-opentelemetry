@@ -197,4 +197,17 @@ OTEL_SERVICE_NAME=my-service
 
 Чтобы отключить SDK: `"otel": { "sdk": { "disabled": true } }`.
 
+Инструментирование напильниками (`&Наблюдаемый`, `&Замеряемый`, `&Подсчитываемый`) по умолчанию **отключено**. Чтобы включить — добавьте `otel.enabled = true`:
+
+```json
+{
+  "otel": {
+    "enabled": true,
+    "service": {
+      "name": "my-service"
+    }
+  }
+}
+```
+
 Подробнее — в документации [opentelemetry](https://github.com/nixel2007/opentelemetry).
