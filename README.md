@@ -8,7 +8,7 @@
 
 Интеграция [OpenTelemetry SDK](https://github.com/nixel2007/opentelemetry) с [Autumn Framework](https://github.com/autumn-library/autumn).
 
-Предоставляет аннотации для автоматической инструментации методов трассировкой и метриками, а также автоматическую настройку трассировки HTTP-сервера [winow](https://github.com/autumn-library/winow).
+Предоставляет аннотации для автоматической инструментации методов трассировкой и метриками.
 
 ## Возможности
 
@@ -16,7 +16,6 @@
 - `&Замеряемый` — запись длительности методов в гистограмму (аналог `@Timed` в Spring Boot)
 - `&Подсчитываемый` — счётчик вызовов методов (аналог `@Counted` в Spring Boot)
 - `&АтрибутСпана` — добавление параметров метода как атрибутов span'а
-- Автоматическая инструментация HTTP-сервера winow (SERVER span на каждый запрос)
 - Автоматическая настройка `ОтелАппендерLogos` для экспорта логов через OTel
 
 ## Совместимость
@@ -40,7 +39,6 @@ opm install autumn-opentelemetry
 #Использовать autumn-opentelemetry
 
 Поделка = Новый Поделка();
-Поделка.ПросканироватьКаталог("src");
 Поделка.ЗапуститьПриложение();
 ```
 
@@ -127,28 +125,27 @@ opm install autumn-opentelemetry
 КонецФункции
 ```
 
-## HTTP-сервер winow
-
-При наличии бина `ОбработчикЗапросов` в контексте `НапильникHttpСервер` автоматически оборачивает метод `СформироватьОтвет` в SERVER span с HTTP semantic conventions:
-
-- `http.request.method`, `url.path`, `url.full`, `client.address`, `client.port`
-- `http.response.status_code` (после обработки)
-- Контекст трассировки извлекается из входящих заголовков
-
 ## Конфигурация логирования
 
-`ОтелДуб` автоматически создаёт бин `ОтелАппендерLogos` и добавляет его в logos. Для настройки уровня экспортируемых логов используйте `autumn-properties.json`:
+`ОтелДуб` автоматически создаёт бин `ОтелАппендерLogos` и регистрирует его в logos. Для настройки уровня экспортируемых логов используйте `autumn-properties.json`:
 
 ```json
 {
   "logos": {
     "logger": {
-      "rootLogger": { "level": "INFO" },
-      "appenders": {
-        "otlp": {
-          "type": "autumn-opentelemetry",
-          "level": "WARN"
-        }
+      "rootLogger": {
+        "level": "INFO",
+        "appenders": ["otel", "console"]
+      }
+    },
+    "appender": {
+      "otel": {
+        "type": "ОтелАппендерLogos",
+        "level": "WARN"
+      },
+      "console": {
+        "type": "ВыводЛогаВКонсоль",
+        "level": "INFO"
       }
     }
   }
@@ -157,7 +154,7 @@ opm install autumn-opentelemetry
 
 ## Конфигурация OpenTelemetry
 
-Настройка экспортёров через переменные окружения (стандарт OTel):
+Настройка через переменные окружения (стандарт OTel):
 
 ```sh
 OTEL_SERVICE_NAME=my-service
@@ -165,6 +162,27 @@ OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318
 OTEL_TRACES_EXPORTER=otlp
 OTEL_METRICS_EXPORTER=otlp
 OTEL_LOGS_EXPORTER=otlp
+```
+
+Либо через файл `autumn-properties.json` (соответствует тем же параметрам):
+
+```json
+{
+  "otel": {
+    "service": {
+      "name": "my-service"
+    },
+    "exporter": {
+      "otlp": {
+        "endpoint": "http://localhost:4318",
+        "protocol": "http/protobuf"
+      }
+    },
+    "traces":  { "exporter": "otlp" },
+    "metrics": { "exporter": "otlp" },
+    "logs":    { "exporter": "otlp" }
+  }
+}
 ```
 
 Подробнее — в документации [opentelemetry](https://github.com/nixel2007/opentelemetry).
