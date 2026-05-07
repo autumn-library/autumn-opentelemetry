@@ -4,7 +4,7 @@
 [![Coverage](https://sonar.openbsl.ru/api/project_badges/measure?project=autumn-opentelemetry&metric=coverage)](https://sonar.openbsl.ru/dashboard?id=autumn-opentelemetry)
 [![Bugs](https://sonar.openbsl.ru/api/project_badges/measure?project=autumn-opentelemetry&metric=bugs)](https://sonar.openbsl.ru/dashboard?id=autumn-opentelemetry)
 [![Code Smells](https://sonar.openbsl.ru/api/project_badges/measure?project=autumn-opentelemetry&metric=code_smells)](https://sonar.openbsl.ru/dashboard?id=autumn-opentelemetry)
-[![Telegram](https://img.shields.io/badge/Telegram-@oscript__community-blue?logo=telegram)](https://t.me/oscript_community)
+[![Telegram](https://img.shields.io/badge/Telegram-чат-blue?logo=telegram)](https://t.me/autumn_winow)
 
 Интеграция [OpenTelemetry SDK](https://github.com/nixel2007/opentelemetry) с [Autumn Framework](https://github.com/autumn-library/autumn).
 
