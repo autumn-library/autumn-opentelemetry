@@ -5,14 +5,16 @@
 
 
 Описание.Имя("autumn-opentelemetry")
-        .Версия("1.0.0")
+        .Версия("1.0.1")
         .Автор("Nikita Fedkin")
         .АдресАвтора("https://github.com/nixel2007")
         .Описание("Интеграция OpenTelemetry SDK с Autumn Framework: аннотации @Наблюдаемый, @Замеряемый, @Подсчитываемый для автоматической инструментации")
         .АдресРепозитория("https://github.com/autumn-library/autumn-opentelemetry")
         .ВерсияСреды("2.0.0")
         .ВключитьФайл("src")
-        .ЗависитОт("opentelemetry", "1.0.0")
+        .ВключитьФайл("docs")
+        .ВключитьФайл("README.md")
+        .ЗависитОт("opentelemetry", "1.0.1")
         .ЗависитОт("annotations", "1.4.0")
         .ЗависитОт("decorator", "2.0.0")
         .ЗависитОт("autumn", "4.3.12")
