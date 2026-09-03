@@ -38,7 +38,7 @@ title: Инструментирование entity
 | Деталька | По умолчанию | Действие |
 | --- | --- | --- |
 | `otel.entity.enabled` | `otel.enabled` | Завязь наблюдателя. При `false` завязь возвращает `Неопределено`, и менеджеры сущностей наблюдателя не получают; SDK при этом не поднимается |
-| `otel.entity.query-text` | `true` | Текст запроса в атрибуте `db.query.text`; значения параметров в него не попадают в любом случае |
+| `otel.entity.query-text` | `false` | Текст запроса в атрибуте `db.query.text`. Запросы самого entity содержат плейсхолдеры вместо значений параметров, но произвольный текст из `ВыполнитьСКоннектором` не санитизируется и может нести литералы, поэтому по умолчанию выключено |
 | `otel.entity.repository.enabled` | `otel.enabled` | Напильник слоя репозиториев |
 
 :::code-group
@@ -49,7 +49,7 @@ title: Инструментирование entity
     "enabled": true,
     "entity": {
       "enabled": true,
-      "query-text": false,
+      "query-text": true,
       "repository": {
         "enabled": true
       }
