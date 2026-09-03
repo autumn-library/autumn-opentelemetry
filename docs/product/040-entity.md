@@ -1,0 +1,69 @@
+---
+title: Инструментирование entity
+---
+
+# Инструментирование entity
+
+Приложение на `autumn-data` получает трассировку и метрики работы с базой данных без единой строки прикладного кода: операции менеджера сущностей, запросы к СУБД, соединения пула, транзакции и вызовы хранилищ становятся спанами и метриками OpenTelemetry. Устроено как в Spring: слой данных инструментируется наблюдателем ORM, слой репозиториев - перехватчиком вокруг бинов.
+
+## Как это работает
+
+1. `ОтелДуб` объявляет завязь `ОтелНаблюдательСущностей` с прозвищем `НаблюдательСущностей` - наблюдатель из библиотеки [opentelemetry-instrumentation-entity](https://github.com/nixel2007/opentelemetry-instrumentation-entity).
+2. `autumn-data` подставляет все желуди с этим прозвищем в каждый менеджер сущностей до его инициализации.
+3. `НапильникОтелХранилищеСущностей` оборачивает хранилища сущностей: бины с прозвищем `ХранилищеСущностей` и пользовательские хранилища с аннотацией `&ХранилищеСущностей`.
+
+Дерево спанов повторяет вызовы:
+
+```text
+ХранилищеПользователей.ПолучитьПоИмяРавно     INTERNAL  code.namespace, code.function.name
+└─ ХранилищеСущностейПользователь.ПолучитьОдно INTERNAL  родительский бин, которому делегирует хранилище
+   └─ ПолучитьОдно Пользователь                INTERNAL  entity.type, entity.result.count
+      └─ SELECT Пользователи                   CLIENT    db.system.name, db.query.text, server.address
+```
+
+## Сигналы
+
+| Сигнал | Имя | Источник |
+| --- | --- | --- |
+| Спан INTERNAL `{Хранилище}.{Метод}` | `code.namespace`, `code.function.name`, `error.type` | напильник |
+| Гистограмма, с `entity.repository.invocations` | `entity.repository`, `code.function.name`, `entity.repository.state` (`success`, `error`), `error.type` | напильник |
+| Спаны операций и запросов, гистограммы `db.client.operation.duration` и `entity.operation.duration`, счетчики `entity.entities` и `entity.transactions`, датчики `db.client.connection.*` | см. [opentelemetry-instrumentation-entity](https://github.com/nixel2007/opentelemetry-instrumentation-entity) | наблюдатель |
+
+Оборачиваются все экспортные методы хранилища, кроме тех, что не ходят в БД: `ПолучитьОбъектМодели`, `ПолучитьПулСущностей`, `СоздатьЭлемент`, `Закрыть`. Пользовательское хранилище делегирует методы родителю - хранилищу из `autumn-data`, и оно тоже обернуто, поэтому у делегированного вызова два вложенных спана: свой и родительский.
+
+Трассировщик и метр наблюдателя - области `entity`; напильник использует бины `ОтелТрассировщик` и `ОтелМетр`, как и остальные напильники.
+
+## Настройки
+
+| Деталька | По умолчанию | Действие |
+| --- | --- | --- |
+| `otel.entity.enabled` | `otel.enabled` | Завязь наблюдателя. При `false` завязь возвращает `Неопределено`, и менеджеры сущностей наблюдателя не получают; SDK при этом не поднимается |
+| `otel.entity.query-text` | `true` | Текст запроса в атрибуте `db.query.text`; значения параметров в него не попадают в любом случае |
+| `otel.entity.repository.enabled` | `otel.enabled` | Напильник слоя репозиториев |
+
+:::code-group
+
+```json [autumn-properties.json]
+{
+  "otel": {
+    "enabled": true,
+    "entity": {
+      "enabled": true,
+      "query-text": false,
+      "repository": {
+        "enabled": true
+      }
+    }
+  }
+}
+```
+
+```sh [Переменные окружения]
+OTEL_ENTITY_ENABLED=true
+OTEL_ENTITY_QUERY_TEXT=false
+OTEL_ENTITY_REPOSITORY_ENABLED=true
+```
+
+:::
+
+Размер пула соединений задается в настройках источника данных `autumn-data` (`РазмерПула`) и попадает в метрику `db.client.connection.max`.

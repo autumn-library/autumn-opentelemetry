@@ -79,6 +79,10 @@ OTEL_SERVICE_NAME=my-service
 
 Полный список параметров OpenTelemetry — в документации [opentelemetry SDK](https://github.com/nixel2007/opentelemetry).
 
+## Инструментирование entity
+
+Параметры `otel.entity.enabled`, `otel.entity.query-text` и `otel.entity.repository.enabled` управляют трассировкой и метриками работы с базой данных через `autumn-data`. По умолчанию наследуют `otel.enabled`. Подробнее - в разделе [Инструментирование entity](/autumn-opentelemetry/entity.md).
+
 ## Конфигурация логирования
 
 `ОтелДуб` автоматически создаёт бин `ОтелАппендерLogos` и регистрирует его в logos. Для настройки уровня экспортируемых логов используйте `autumn-properties.json`:
