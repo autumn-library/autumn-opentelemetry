@@ -13,9 +13,6 @@ jobs:
     uses: autumn-library/workflows/.github/workflows/sonar.yml@v1
     with:
       github_repository: ${{ github.repository }}
-      # entity 4.4 и opentelemetry ведут контекст в данных потока исполнения (ТекущийПоток),
-      # а эта функция есть пока только в dev-сборке OneScript.
-      oscript_version: dev
       test_engine: oneunit
       test_dir_paths: tests
       coveralls: true

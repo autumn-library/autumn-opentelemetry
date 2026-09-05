@@ -10,9 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # entity 4.4 и opentelemetry ведут контекст в данных потока исполнения (ТекущийПоток),
-        # а эта функция есть пока только в dev-сборке OneScript.
-        oscript_version: ['dev']
+        oscript_version: ['default', 'stable', 'dev']
     uses: autumn-library/workflows/.github/workflows/test.yml@main
     with:
       oscript_version: ${{ matrix.oscript_version }}
