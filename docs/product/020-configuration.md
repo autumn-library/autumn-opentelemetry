@@ -81,7 +81,7 @@ OTEL_SERVICE_NAME=my-service
 
 ## Инструментирование entity
 
-Параметры `otel.entity.enabled` и `otel.entity.query-text` управляют трассировкой и метриками работы с базой данных через `autumn-data`. Признак включения по умолчанию наследует `otel.enabled`, текст запроса по умолчанию не пишется. Подробнее - в разделе [Инструментирование entity](/autumn-opentelemetry/entity.md).
+Параметры `otel.entity.enabled`, `otel.entity.query-text` и `otel.entity.repository.enabled` управляют трассировкой и метриками работы с базой данных через `autumn-data`. Признаки включения по умолчанию наследуют `otel.enabled`, текст запроса по умолчанию не пишется. Подробнее - в разделе [Инструментирование entity](/autumn-opentelemetry/entity.md).
 
 ## Конфигурация логирования
 
