@@ -29,7 +29,7 @@ title: Инструментирование entity
 | Гистограмма, с `entity.repository.invocations` | `entity.repository`, `code.function.name`, `entity.repository.state` (`success`, `error`), `error.type` | напильник |
 | Спаны операций и запросов, гистограммы `db.client.operation.duration` и `entity.operation.duration`, счетчики `entity.entities` и `entity.transactions`, датчики `db.client.connection.*` | см. [opentelemetry-instrumentation-entity](https://github.com/nixel2007/opentelemetry-instrumentation-entity) | наблюдатель |
 
-Оба сигнала пишет `opentelemetry-instrumentation-entity`: напильник находит бины с прозвищем `ХранилищеСущностей` и отдает их инструментированию, а какие методы оборачиваются и что попадает в атрибуты - описано [в его справочнике](https://github.com/nixel2007/opentelemetry-instrumentation-entity/blob/master/docs/api/ОтелИнструментированиеХранилища.md).
+Оба сигнала пишет `opentelemetry-instrumentation-entity`: напильник находит бины с прозвищем `ХранилищеСущностей` и отдает их инструментированию, а какие методы оборачиваются и что попадает в атрибуты - описано [в его справочнике](https://github.com/nixel2007/opentelemetry-instrumentation-entity/blob/master/docs/api/ОтелИнструментированиеХранилищаСущностей.md).
 
 Трассировщик и метр наблюдателя - области `entity`; напильник использует бины `ОтелТрассировщик` и `ОтелМетр`, как и остальные напильники.
 
