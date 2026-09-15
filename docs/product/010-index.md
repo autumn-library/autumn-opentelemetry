@@ -20,7 +20,7 @@ opm install autumn-opentelemetry
 
 ## Совместимость
 
-- OneScript 2.0.0+
+- OneScript 2.2.0+
 - [opentelemetry](https://github.com/nixel2007/opentelemetry) >= 1.0.0
 - [autumn](https://github.com/autumn-library/autumn) >= 4.3.12
 
