@@ -14,7 +14,7 @@
         .ВключитьФайл("src")
         .ВключитьФайл("docs")
         .ВключитьФайл("README.md")
-        .ЗависитОт("opentelemetry", "2.0.0")
+        .ЗависитОт("opentelemetry", "3.0.0")
         .ЗависитОт("opentelemetry-instrumentation-entity", "1.1.1")
         .ЗависитОт("annotations", "1.6.0")
         .ЗависитОт("decorator", "3.1.1")
