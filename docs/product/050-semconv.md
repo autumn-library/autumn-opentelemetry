@@ -44,11 +44,27 @@ title: Семантические соглашения
 
 ## Исключения
 
-[Exceptions](https://opentelemetry.io/docs/specs/semconv/exceptions/)
+[Exceptions in logs](https://opentelemetry.io/docs/specs/semconv/exceptions/exceptions-logs/)
 
-Спан `&Наблюдаемый`, из метода которого вышло исключение, получает статус `Error` и событие
-исключения через [ОтелСпан.ЗаписатьИсключение](/api/opentelemetry/Трассировка/ОтелСпан.md).
-Атрибуты `exception.*` события заполняет ядро, см. [Исключения в семантических соглашениях opentelemetry](/opentelemetry/semconv.md#исключения).
+Исключение, вышедшее из метода `&Наблюдаемый`, записывается записью лога в контексте спана метода:
+
+| Поле | Значение |
+|---|---|
+| Имя события | `exception`: метод желудя не относится к операции какой-либо предметной области семантических соглашений |
+| Серьёзность | `ERROR` у спанов `server` и `consumer`, `WARN` у остальных |
+| Атрибуты | `exception.*` из исключения, `code.function.name`, `code.namespace` |
+
+Атрибуты `exception.*` заполняет ядро, см. [Исключения в семантических соглашениях opentelemetry](/opentelemetry/semconv.md#исключения).
+
+## Error
+
+[Error](https://opentelemetry.io/docs/specs/semconv/registry/attributes/error/)
+
+| Атрибут | Кто заполняет |
+|---|---|
+| `error.type` | спаны `&Наблюдаемый`, из метода которых вышло исключение: [ОтелУтилиты.ТипОшибки](/api/opentelemetry/Ядро/ОтелУтилиты.md) — код ошибки библиотеки errors, код нативной ошибки OneScript или `_OTHER` |
+
+Описание статуса такого спана — текст исключения, по [recording-errors](https://opentelemetry.io/docs/specs/semconv/general/recording-errors/).
 
 ## Инструментирование entity
 
