@@ -36,8 +36,6 @@ title: Семантические соглашения
 |---|---|
 | `code.function.name` | спаны `&Наблюдаемый`, гистограммы `&Замеряемый`, счётчики `&Подсчитываемый`: полное имя метода `ИмяЖелудя.ИмяМетода` |
 
-Устаревший `code.namespace` не заполняется: по semconv пространство имён входит в полное имя `code.function.name`.
-
 ## Исключения
 
 [Exceptions in logs](https://opentelemetry.io/docs/specs/semconv/exceptions/exceptions-logs/)
