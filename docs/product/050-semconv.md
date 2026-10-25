@@ -25,6 +25,9 @@ title: Семантические соглашения
 Атрибуты заполняет детектор [ОтелДетекторРесурсаДистрибутива](/api/autumn-opentelemetry/Классы/ОтелДетекторРесурсаДистрибутива.md).
 Адрес схемы его ресурса — `https://opentelemetry.io/schemas/1.44.0`.
 
+Остальные атрибуты ресурса — `service.*`, `telemetry.sdk.*`, атрибуты встроенных детекторов — заполняет
+ядро, см. [Ресурс в семантических соглашениях opentelemetry](/opentelemetry/semconv.md#ресурс).
+
 ## Code
 
 [Code](https://opentelemetry.io/docs/specs/semconv/registry/attributes/code/)
@@ -45,4 +48,9 @@ title: Семантические соглашения
 
 Спан `&Наблюдаемый`, из метода которого вышло исключение, получает статус `Error` и событие
 исключения через [ОтелСпан.ЗаписатьИсключение](/api/opentelemetry/Трассировка/ОтелСпан.md).
-Атрибуты `exception.*` события заполняет ядро.
+Атрибуты `exception.*` события заполняет ядро, см. [Исключения в семантических соглашениях opentelemetry](/opentelemetry/semconv.md#исключения).
+
+## Инструментирование entity
+
+Спаны и метрики работы с базой данных через `autumn-data` пишет `opentelemetry-instrumentation-entity`.
+Их атрибуты описаны в [семантических соглашениях opentelemetry-instrumentation-entity](/opentelemetry-instrumentation-entity/semconv.md).
