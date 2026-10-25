@@ -8,6 +8,7 @@
 // BSLLS:PublicMethodsDescription-off
 // BSLLS:MissingParameterDescription-off
 // BSLLS:MissingReturnedValueDescription-off
+// BSLLS:MagicNumber-off
 #Использовать autumn
 #Использовать asserts
 #Использовать extends
