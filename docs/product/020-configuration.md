@@ -87,7 +87,7 @@ OTEL_SERVICE_NAME=my-service
 2. Детекторы ресурса приложения — желуди с прозвищем `ДетекторРесурса`, в порядке `&Порядок` по возрастанию. При совпадении ключей важнее детектор с большим `&Порядок`.
 3. Переменные окружения `OTEL_RESOURCE_ATTRIBUTES` и `OTEL_SERVICE_NAME`, затем параметры `otel.resource.attributes` и `otel.service.name`.
 
-`autumn-opentelemetry` сам регистрирует детектор `ОтелДетекторРесурсаДистрибутива`. Он добавляет атрибуты `telemetry.distro.name = autumn-opentelemetry` и `telemetry.distro.version` с версией пакета.
+`autumn-opentelemetry` сам содержит такой детектор — желудь `ОтелДетекторРесурсаДистрибутива`. Он добавляет атрибуты `telemetry.distro.name = autumn-opentelemetry` и `telemetry.distro.version` с версией пакета.
 
 Свой детектор — желудь с прозвищем `ДетекторРесурса`:
 
