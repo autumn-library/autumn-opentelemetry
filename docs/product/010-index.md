@@ -104,6 +104,7 @@ opm install autumn-opentelemetry
 ### Руководство пользователя
 - [Конфигурация](/autumn-opentelemetry/configuration.md) — параметры OpenTelemetry и логирования
 - [Аннотации](/autumn-opentelemetry/annotations.md) — подробное описание аннотаций с примерами
+- [Семантические соглашения](/autumn-opentelemetry/semconv.md) — атрибуты semconv в ресурсе, спанах и метриках
 
 ### Справочник API
 - [Публичный интерфейс](/api/autumn-opentelemetry/index.md)
