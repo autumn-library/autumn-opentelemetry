@@ -95,7 +95,7 @@ title: Аннотации
 
 Записывает длительность каждого вызова метода в гистограмму OTel в секундах, как требуют семантические соглашения для гистограмм длительности. До версии 1.1.0 длительность писалась в миллисекундах.
 
-Атрибуты гистограммы: `code.function.name`, `code.namespace`, `exception` (при ошибке).
+Атрибуты гистограммы: `code.function.name`, `code.namespace`, `error.type` (при ошибке: код ошибки, код нативной ошибки OneScript или `_OTHER`).
 
 :::code-group
 
@@ -137,7 +137,7 @@ title: Аннотации
 
 Инкрементирует счётчик OTel при каждом вызове метода.
 
-Атрибуты счётчика: `code.function.name`, `code.namespace`, `result` (`success`/`failure`), `exception` (при ошибке).
+Атрибуты счётчика: `code.function.name`, `code.namespace`, `error.type` (при ошибке: код ошибки, код нативной ошибки OneScript или `_OTHER`). Успешные вызовы — точки без `error.type`.
 
 :::code-group
 
